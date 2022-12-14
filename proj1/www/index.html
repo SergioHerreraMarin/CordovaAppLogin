@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <link rel="stylesheet" href="css/index.css">
+        <title>PROGRAMA 1</title>
+    </head>
+    <body>
+
+        <div id="register">
+            <h3>Register</h3>
+            <label for="Username">Username: </label>
+            <input type="text" id="register-userName" name="Username: "/>
+            <br>
+            <label for="Email">Email: </label>
+            <input type="email" id="register-email" name="Email: "/>
+            <br>
+            <label for="Password">Password: </label>
+            <input type="password" id="register-password" name="Password: "/>
+            <br>
+            <label for="Password">Password: </label>
+            <input type="password" id="register-password2" name="Password2: "/>
+            <br>
+            <button onclick="registre(); return false;">REGISTRO</button>
+        </div>
+        <hr>
+        <div id="login">
+            <h3>Login</h3>
+            <label for="Username">Username: </label>
+            <input type="text" id="login-userName" name="Username: "/>
+            <br>
+            <label for="Password">Password: </label>
+            <input type="password" id="login-password" name="Password: "/>
+            <br>
+            <button onclick="login(); return false;">LOGIN</button>
+        </div>
+        
+        
+        <script>
+            
+            let listUsuaris = [];
+            let usuari = {};
+
+            function login(){
+                let username = document.getElementById("login-userName").value;
+                let userpassword = document.getElementById("login-password").value;
+               
+                let userExists = false;
+
+                for(let i = 0; i < listUsuaris.length; i++){
+                    
+                    if(listUsuaris[i].name == username && listUsuaris[i].password == userpassword){
+                        userExists = true;
+                    }
+
+                }
+
+                if(userExists){
+                    alert("Login done!");
+                }else{
+                    alert("ERROR: El usuario no existe o el password es incorrecto");
+                }
+            }
+
+
+            function registre(){
+                let username = document.getElementById("register-userName").value;
+                let useremail = document.getElementById("register-email").value;
+                let userpassword = document.getElementById("register-password").value;
+                let userpassword2 = document.getElementById("register-password2").value;
+                
+                let userExists = false;
+
+                if(userpassword == userpassword2){
+                    for(let i = 0; i < listUsuaris.length; i++){
+                        if(listUsuaris[i].name == username || listUsuaris[i].email == useremail || listUsuaris[i].password == userpassword){
+                            userExists = true;
+                        }
+                    }
+
+                    if(!userExists){
+                    usuari = {name:username, email:useremail, password:userpassword};
+                    listUsuaris.push(usuari);
+                    alert("Registrado correctamente");
+                    }else{
+                        alert("El usuario ya ha sido registrado");
+                    }  
+
+                }else{
+                    alert("Los password no coinciden");
+                }
+
+            }
+
+        </script>
+        
+    </body>
+</html>
